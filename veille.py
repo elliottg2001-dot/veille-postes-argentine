@@ -741,7 +741,7 @@ def main():
     # Discord
     print("\n📣 Envoi Discord...")
     if new_jobs:
-        discord_offers([
+        discord_offres([
             {
                 "titre":      j["titre"],
                 "entreprise": j["entreprise"],
