@@ -1,9 +1,7 @@
 name: Veille Postes Argentine
 
 on:
-  schedule:
-    - cron: "*/10 * * * *"
-  workflow_dispatch:
+  workflow_dispatch:   # ⏸️ Agent en pause — relance manuelle uniquement
 
 jobs:
   veille:
