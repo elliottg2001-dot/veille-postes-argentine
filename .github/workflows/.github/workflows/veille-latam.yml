@@ -1,0 +1,31 @@
+name: Veille VIE LatAm
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # toutes les heures à :17
+  workflow_dispatch:       # lancement manuel possible
+
+concurrency:
+  group: veille-vie-latam
+  cancel-in-progress: false
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write          # pour commiter le state
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run agent LatAm
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: python veille_latam.py
+
+      - name: Commit state
